@@ -1,0 +1,106 @@
+HTML (index.html)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="calculator">
+    <h1>Binary Calculator</h1>
+    <input type="text" id="binary1" placeholder="Enter first binary number">
+    <select id="operation">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" id="binary2" placeholder="Enter second binary number">
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+CSS (styles.css)
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.calculator {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input, select, button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+JavaScript (script.js)
+
+function calculate() {
+  const binary1 = document.getElementById("binary1").value;
+  const binary2 = document.getElementById("binary2").value;
+  const operation = document.getElementById("operation").value;
+
+  if (!/^[01]+$/.test(binary1) || !/^[01]+$/.test(binary2)) {
+    document.getElementById("result").innerText = "Invalid binary input!";
+    return;
+  }
+
+  const num1 = parseInt(binary1, 2);
+  const num2 = parseInt(binary2, 2);
+  let result;
+
+  switch (operation) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "*":
+      result = num1 * num2;
+      break;
+    case "/":
+      result = num1 / num2;
+      break;
+    default:
+      result = "Invalid operation";
+  }
+
+  document.getElementById("result").innerText = `Result: ${result.toString(2)}`;
+}
